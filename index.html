@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sans Duel</title>
+  <meta name="description" content="Race a friend through the real sans fight (jcw87's Bad Time Simulator). Same attacks, same seed, watch each other live.">
+  <link rel="icon" href="game/icon-32.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/peerjs.min.js" integrity="sha384-nlUQ8ZqCbvStErob+biJNzSgltf6urV3VGqhfIfzhmg9RXmpeRm76ELw0pYnKlTR" crossorigin="anonymous" defer></script>
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <section id="lobby">
+    <div class="screen" id="menu">
+      <h1>SANS<br><span>DUEL</span></h1>
+      <p class="sub">race a friend through the real sans fight.<br>same attacks. same order. first to beat sans wins.</p>
+      <label class="field">your name <input id="name" maxlength="12" placeholder="Chara" autocomplete="off"></label>
+      <button id="btnHost" class="big">♥ HOST A RACE</button>
+      <button id="btnJoin" class="big">♥ JOIN A RACE</button>
+      <button id="btnSolo">PLAY SOLO</button>
+      <p class="credit">game: <a href="https://github.com/jcw87/c2-sans-fight" target="_blank" rel="noopener">Bad Time Simulator</a> by jcw87 · UNDERTALE © Toby Fox</p>
+    </div>
+
+    <div class="screen hidden" id="host">
+      <h2>HOST A RACE</h2>
+      <button id="hostgo" class="big">CREATE ROOM</button>
+      <div id="hostinfo" class="hidden">
+        <p class="sub">send this code (or the link) to your opponent</p>
+        <div id="hostcode" class="code">…</div>
+        <div class="linkrow"><input id="hostlink" readonly><button id="copylink">COPY</button></div>
+      </div>
+      <p id="hoststatus" class="status"></p>
+      <button class="back">BACK</button>
+    </div>
+
+    <div class="screen hidden" id="join">
+      <h2>JOIN A RACE</h2>
+      <label class="field">room code <input id="joincode" maxlength="5" placeholder="ABCDE" autocomplete="off" spellcheck="false"></label>
+      <button id="joingo" class="big">JOIN</button>
+      <p id="joinstatus" class="status"></p>
+      <button class="back">BACK</button>
+    </div>
+  </section>
+
+  <main id="arena" class="hidden">
+    <div id="mine">
+      <iframe id="game" title="Your sans fight" allow="autoplay; gamepad; fullscreen"></iframe>
+      <div id="myov" class="ov hidden"></div>
+    </div>
+    <aside id="side">
+      <div class="card" id="oppcard">
+        <div class="who"><span id="oppname">???</span><span class="tag"></span></div>
+        <div class="vid"><video id="oppvid" autoplay muted playsinline></video><div id="vidwait">waiting for video…</div></div>
+        <div class="hp"><i class="y"></i><i class="k"></i></div><span class="hptxt"></span>
+        <div class="prog"><i></i></div><span class="progtxt"></span>
+      </div>
+      <div class="card" id="mecard">
+        <div class="who"><span id="myname">you</span><span class="tag"></span></div>
+        <div class="hp"><i class="y"></i><i class="k"></i></div><span class="hptxt"></span>
+        <div class="prog"><i></i></div><span class="progtxt"></span>
+      </div>
+      <p id="racestatus"></p>
+      <div class="help">
+        <p><b>Z</b>/<b>Enter</b> confirm · <b>X</b>/<b>Shift</b> back · <b>arrows</b> move</p>
+        <p>first to beat sans wins. if you die, your opponent wins as soon as they get past the attack you died on.</p>
+      </div>
+      <button id="leave">LEAVE</button>
+    </aside>
+  </main>
+</body>
+</html>
